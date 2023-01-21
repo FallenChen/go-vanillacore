@@ -1,6 +1,6 @@
 package sql
 
-// denotes a value of a supported type
+// Constant denotes a value of a supported type
 type Constant interface {
 
 	// GetType Returns the type corresponding to this constant.
@@ -22,4 +22,19 @@ type Constant interface {
 	Mul(c Constant) Constant
 
 	Div(c Constant) Constant
+}
+
+func DefaultInstance(t Type) Constant {
+	v := t.GetSqlType()
+	switch v.(type) {
+	//case sql.NullInt32:
+	//	return
+	//case sql.NullInt64:
+	//	return
+	//case sql.NullFloat64:
+	//	return
+	//case sql.NullString:
+	//	return
+	}
+	return nil
 }

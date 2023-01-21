@@ -1,5 +1,6 @@
 package sql
 
+// Schema contains the name and type of each field in a table
 type Schema struct {
 	Fields map[string]*Type
 }
@@ -23,4 +24,12 @@ func (schema *Schema) addAll(sch *Schema) {
 // their natural ordering
 func (schema *Schema) fields() {
 
+}
+
+func hasField(fldName string) bool {
+	return false
+}
+
+func FldType(fldName string) *Type {
+	return nil
 }
