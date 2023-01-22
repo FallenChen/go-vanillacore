@@ -10,8 +10,8 @@ type Type interface {
 	GetSqlType() driver.Valuer
 
 	// GetArgument Returns the argument associated with this instance.
-	// For example, this methods returns 20 for the SQL type VARCHAR(20).
-	GetArgument() int
+	// For example, these methods returns 20 for the SQL type VARCHAR(20).
+	GetArgument() int8
 
 	// IsFixedSize Returns whether the number of bytes required to encode
 	IsFixedSize() bool
@@ -20,7 +20,7 @@ type Type interface {
 	IsNumeric() bool
 
 	// MaxSize Returns the maximum number of bytes required to encode
-	MaxSize() int
+	MaxSize() int8
 
 	MaxValue() Constant
 
