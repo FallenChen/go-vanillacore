@@ -9,9 +9,9 @@ type Constant interface {
 	// AsGoVal Returns the Go object corresponding to this constant.
 	AsGoVal() any
 
-	AsBytes()
+	AsBytes() []byte
 
-	Size() int
+	Size() int8
 
 	CastTo(p Type) Constant
 
