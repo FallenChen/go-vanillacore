@@ -20,7 +20,7 @@ type Type interface {
 	IsNumeric() bool
 
 	// MaxSize Returns the maximum number of bytes required to encode
-	MaxSize() int8
+	MaxSize() int32
 
 	MaxValue() Constant
 

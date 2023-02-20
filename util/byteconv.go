@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	INT32SIZE = 4
+	Int32Size = int32(32 / 8)
 )
 
 func ToBytes(val int32) []byte {

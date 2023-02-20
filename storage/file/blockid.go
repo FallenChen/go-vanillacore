@@ -8,8 +8,8 @@ import (
 
 type BlockID struct {
 	FileName   string
-	BlkNum     uint64
-	MyHashCode uint32
+	BlkNum     int64
+	MyHashCode int32
 }
 
 func (b BlockID) CompareTo(other BlockID) int {
@@ -26,18 +26,18 @@ func (b BlockID) CompareTo(other BlockID) int {
 	return 0
 }
 
-func New(fileName string, blkNum uint64) BlockID {
-	bolckID := BlockID{FileName: fileName, BlkNum: blkNum}
+func New(fileName string, blkNum int64) *BlockID {
+	bolckID := &BlockID{FileName: fileName, BlkNum: blkNum}
 	h := fnv.New32()
 	h.Write([]byte(bolckID.ToString()))
-	bolckID.MyHashCode = h.Sum32()
+	bolckID.MyHashCode = int32(h.Sum32())
 	return bolckID
 }
 
 func (b BlockID) ToString() string {
-	return "[file " + b.FileName + ", block " + strconv.FormatUint(b.BlkNum, 10) + "]"
+	return "[file " + b.FileName + ", block " + strconv.FormatInt(b.BlkNum, 10) + "]"
 }
 
-func (b BlockID) HashCode() uint32 {
+func (b BlockID) HashCode() int32 {
 	return b.MyHashCode
 }

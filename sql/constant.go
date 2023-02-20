@@ -11,7 +11,7 @@ type Constant interface {
 
 	AsBytes() []byte
 
-	Size() int8
+	Size() int32
 
 	CastTo(p Type) Constant
 

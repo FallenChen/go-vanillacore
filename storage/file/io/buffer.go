@@ -5,9 +5,9 @@ type Buffer interface {
 
 	Put(position int, src []byte) Buffer
 
-	clear()
+	Clear()
 
-	rewind()
+	Rewind()
 
-	close()
+	Close()
 }
