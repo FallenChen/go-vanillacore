@@ -10,7 +10,7 @@ const BlockSize int64 = 4096
 
 type Page struct {
 	contents io.Buffer
-	fileMgr  *FileMgr
+	fileMgr  *Mgr
 }
 
 func MaxSize(t sql.Type) int32 {
