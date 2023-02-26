@@ -4,7 +4,7 @@ type VirtualChannel struct {
 	FileChannel Channel
 }
 
-func NewVirtualChannel(fileChannel Channel) *VirtualChannel {
+func NewVirtualChannel(fileChannel *Channel) *VirtualChannel {
 
 	return &VirtualChannel{}
 }

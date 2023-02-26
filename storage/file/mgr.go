@@ -48,14 +48,17 @@ func NewMgr(dbName string) (*Mgr, error) {
 
 	isNew := !fileExists(dbFile)
 
+	// check the existence of log folder
 	if !isNew && !fileExists(logFile) {
 		return nil, errors.New("log file for the existed " + dbName + " is missing")
 	}
 
+	// create the directory if the database is new
 	if isNew && (!mkdir(dbFile)) {
 		return nil, errors.New("cannot create " + dbName)
 	}
 
+	// remove any leftover temporary tables
 	dirs, err := os.ReadDir(dbFile)
 	if err != nil {
 		return nil, err
@@ -100,6 +103,7 @@ func (file *Mgr) prepareAnchor(anchor string) *sync.Mutex {
 	return file.lock[code]
 }
 
+// Reads the contents of a disk block into a byte buffer.
 func (file *Mgr) read(blk BlockID, buffer fileIO.Buffer) error {
 	fileChannel, err := file.getFileChannel(blk.FileName)
 
@@ -159,6 +163,7 @@ func (file *Mgr) getFileChannel(fileName string) (*fileIO.Channel, error) {
 	mutex.Lock()
 	defer mutex.Unlock()
 	fileChannel, ok := file.OpenFiles.Load(fileName)
+
 	if !ok {
 		if fileName == log.Default_Log_File {
 			dbFile, err := createChildFile(file.LogDirectory, fileName)
@@ -169,10 +174,11 @@ func (file *Mgr) getFileChannel(fileName string) (*fileIO.Channel, error) {
 			if err != nil {
 				return nil, err
 			}
-			//fileChannel = fileIO.NewVirtualChannel(channel)
+			fileChannel = fileIO.NewVirtualChannel(channel)
 			//file.OpenFiles.Store(fileName, fileChannel)
 		}
 	}
+
 	return fileChannel, nil
 }
 
