@@ -24,7 +24,7 @@ type Mgr struct {
 
 	IsNew bool
 
-	OpenFiles util.Map[string, *fileIO.Channel]
+	OpenFiles util.Map[string, fileIO.Channel]
 
 	FileNotEmptyCache util.Map[string, bool]
 
@@ -158,7 +158,7 @@ func (file *Mgr) Size(fileName string) (int64, error) {
 	return size / BlockSize, err
 }
 
-func (file *Mgr) getFileChannel(fileName string) (*fileIO.Channel, error) {
+func (file *Mgr) getFileChannel(fileName string) (fileIO.Channel, error) {
 	mutex := file.prepareAnchor(fileName)
 	mutex.Lock()
 	defer mutex.Unlock()
